@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>G6PD-Safe Meal Planner (Dark Mode with Icons)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; padding: 20px;
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+        h1, h2 {
+            color: #90ee90;
+        }
+        .day-section, .checklist, .recipe-section, .prep-tips {
+            margin-bottom: 30px; padding: 15px;
+            background: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        ul { padding-left: 20px; }
+        .checklist input { margin-right: 10px; }
+        .category { font-weight: bold; color: #64b5f6; margin-top: 20px; }
+        .accordion {
+            cursor: pointer; background-color: #2c2c2c; color: #fff;
+            padding: 10px; border: none; outline: none;
+            transition: 0.4s; width: 100%; text-align: left;
+            font-size: 16px; font-weight: bold;
+        }
+        .accordion.active, .accordion:hover {
+            background-color: #444;
+        }
+        .panel {
+            display: none; background-color: #1e1e1e; overflow: hidden;
+            padding: 0 10px; border-left: 3px solid #666;
+        }
+        li::marker {
+            content: "• ";
+        }
+    </style>
+
+    <link rel="manifest" href="manifest.json">
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+      }
+    </script>
+</head>
+<body>
+    <h1>🌙 G6PD-Safe Weekly Meal Planner</h1>
+
+    <div class="day-section">
+        <h2>📅 Sunday</h2>
+        <ul>
+            <li><strong>🍳 Breakfast:</strong> Greek Yogurt with Berries and Oats</li>
+            <li><strong>🥗 Lunch:</strong> Salmon with Roasted Sweet Potatoes & Broccoli</li>
+            <li><strong>🍽️ Dinner:</strong> Tuna Salad Wrap</li>
+        </ul>
+    </div>
+    
+    <div class="day-section">
+        <h2>📅 Monday</h2>
+        <ul>
+            <li><strong>🍳 Breakfast:</strong> Scrambled Eggs + Avocado Toast</li>
+            <li><strong>🥗 Lunch:</strong> Grilled Chicken with Quinoa and Greens</li>
+            <li><strong>🍽️ Dinner:</strong> Oven-Baked Turkey Meatballs</li>
+        </ul>
+    </div>
+    
+    <div class="day-section">
+        <h2>📅 Tuesday</h2>
+        <ul>
+            <li><strong>🍳 Breakfast:</strong> Banana Oat Pancakes</li>
+            <li><strong>🥗 Lunch:</strong> Lentil Soup with Whole Wheat Pita</li>
+            <li><strong>🍽️ Dinner:</strong> Herb-Baked Cod with Mashed Sweet Potato</li>
+        </ul>
+    </div>
+    
+    <div class="day-section">
+        <h2>📅 Wednesday</h2>
+        <ul>
+            <li><strong>🍳 Breakfast:</strong> Avocado Egg Toast</li>
+            <li><strong>🥗 Lunch:</strong> Shrimp and Roasted Vegetables</li>
+            <li><strong>🍽️ Dinner:</strong> Vegetable Omelet with Toast</li>
+        </ul>
+    </div>
+    
+    <div class="day-section">
+        <h2>📅 Thursday</h2>
+        <ul>
+            <li><strong>🍳 Breakfast:</strong> Greek Yogurt + Honey + Oats</li>
+            <li><strong>🥗 Lunch:</strong> Baked Lamb with Mashed Sweet Potato & Zucchini</li>
+            <li><strong>🍽️ Dinner:</strong> Banana Oat Pancakes</li>
+        </ul>
+    </div>
+    
+    <div class="day-section">
+        <h2>📅 Friday (Rest Day)</h2>
+        <ul>
+            <li><strong>🍳 Breakfast:</strong> Dates + Water</li>
+            <li><strong>🥗 Lunch:</strong> Tuna Salad Wrap</li>
+            <li><strong>🍽️ Dinner:</strong> Vegetable Soup + Boiled Egg</li>
+        </ul>
+    </div>
+    
+    <div class="day-section">
+        <h2>📅 Saturday</h2>
+        <ul>
+            <li><strong>🍳 Breakfast:</strong> Egg Muffins + Tomato Toast</li>
+            <li><strong>🥗 Lunch:</strong> Falafel Bowl with Quinoa and Greens</li>
+            <li><strong>🍽️ Dinner:</strong> Herb-Baked Cod with Mashed Sweet Potato</li>
+        </ul>
+    </div>
+    
+    <div class="checklist">
+        <h2>🛒 Grocery Checklist</h2>
+<div class='category'>Proteins</div><ul><li><input type='checkbox'> Chicken breast: 1.2 kg</li><li><input type='checkbox'> Salmon: 500 g</li><li><input type='checkbox'> Cod: 400 g</li><li><input type='checkbox'> Ground beef: 300 g</li><li><input type='checkbox'> Tuna (canned in water): 3 cans</li><li><input type='checkbox'> Turkey breast: 400 g</li><li><input type='checkbox'> Eggs: 14</li><li><input type='checkbox'> Shrimp: 400 g</li><li><input type='checkbox'> Lamb (lean cut): 300 g</li></ul><div class='category'>Vegetables</div><ul><li><input type='checkbox'> Broccoli: 2 heads</li><li><input type='checkbox'> Carrots: 6</li><li><input type='checkbox'> Spinach: 300 g</li><li><input type='checkbox'> Sweet potatoes: 4 medium</li><li><input type='checkbox'> Zucchini: 3</li><li><input type='checkbox'> Green beans: 300 g</li><li><input type='checkbox'> Mixed salad greens: 2 bags</li><li><input type='checkbox'> Tomatoes: 5</li><li><input type='checkbox'> Onions: 5</li><li><input type='checkbox'> Garlic: 2 bulbs</li><li><input type='checkbox'> Cucumber: 2</li><li><input type='checkbox'> Bell pepper: 2</li></ul><div class='category'>Fruits</div><ul><li><input type='checkbox'> Bananas: 7</li><li><input type='checkbox'> Apples: 5</li><li><input type='checkbox'> Berries (fresh or frozen): 300 g</li><li><input type='checkbox'> Dates: 200 g</li><li><input type='checkbox'> Avocado: 3</li></ul><div class='category'>Grains & Legumes</div><ul><li><input type='checkbox'> Quinoa: 300 g</li><li><input type='checkbox'> Brown rice: 600 g</li><li><input type='checkbox'> Whole grain bread: 1 loaf</li><li><input type='checkbox'> Whole wheat pita: 6 pieces</li><li><input type='checkbox'> Oats: 500 g</li><li><input type='checkbox'> Couscous: 200 g</li><li><input type='checkbox'> Lentils: 250 g</li><li><input type='checkbox'> Whole grain crackers: 1 box</li><li><input type='checkbox'> Whole grain toast: as needed</li></ul><div class='category'>Dairy & Alternatives</div><ul><li><input type='checkbox'> Greek yogurt (plain): 700 g</li><li><input type='checkbox'> Almond milk (unsweetened): 1 liter</li><li><input type='checkbox'> Cottage cheese: 200 g</li></ul><div class='category'>Pantry Staples & Condiments</div><ul><li><input type='checkbox'> Olive oil: 250 ml</li><li><input type='checkbox'> Almond butter: 200 g</li><li><input type='checkbox'> Salt: as needed</li><li><input type='checkbox'> Pepper: as needed</li><li><input type='checkbox'> Cumin: as needed</li><li><input type='checkbox'> Turmeric: as needed</li><li><input type='checkbox'> Cinnamon: as needed</li><li><input type='checkbox'> Chili flakes: as needed</li><li><input type='checkbox'> Honey: small jar</li><li><input type='checkbox'> Herbal tea: 1 box</li></ul></div>
+<div class="recipe-section">
+    <h2>📚 Recipe Collection</h2>
+
+    <button class="accordion">🍽️ Salmon with Roasted Sweet Potatoes & Broccoli</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>150g salmon fillet</li><li>1 medium sweet potato</li><li>1 cup broccoli florets</li><li>1 tbsp olive oil</li><li>Salt & pepper</li><li>Lemon slices (optional)</li></ul><strong>📋 Instructions:</strong><ol><li>Preheat oven to 200°C (400°F).</li><li>Peel and dice sweet potato, toss with olive oil, salt, and pepper.</li><li>Place sweet potatoes on baking tray and bake for 10 minutes.</li><li>Add salmon (seasoned) and broccoli to the tray. Drizzle with oil.</li><li>Bake another 12–15 minutes until salmon is cooked through.</li><li>Serve with lemon slices.</li></ol></div>
+    <button class="accordion">🍽️ Grilled Chicken with Quinoa and Greens</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>150g chicken breast</li><li>1/2 cup quinoa</li><li>1 cup mixed greens</li><li>1 tbsp olive oil</li><li>1 tsp cumin</li><li>Salt & pepper</li><li>Lemon juice</li></ul><strong>📋 Instructions:</strong><ol><li>Cook quinoa according to package instructions.</li><li>Season chicken with salt, pepper, and cumin. Grill until cooked through.</li><li>Toss greens with olive oil and lemon juice.</li><li>Serve chicken over quinoa and greens.</li></ol></div>
+    <button class="accordion">🍽️ Greek Yogurt with Berries and Oats</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>1 cup plain Greek yogurt</li><li>1/2 cup mixed berries</li><li>1/4 cup oats</li><li>1 tsp honey (optional)</li></ul><strong>📋 Instructions:</strong><ol><li>Layer Greek yogurt, oats, and berries in a bowl.</li><li>Top with a drizzle of honey if desired.</li></ol></div>
+    <button class="accordion">🍽️ Lentil Soup with Whole Wheat Pita</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>1 cup cooked lentils</li><li>1/2 onion (chopped)</li><li>1 garlic clove (minced)</li><li>1 carrot (diced)</li><li>1 tbsp olive oil</li><li>2 cups vegetable broth</li><li>Salt, pepper, cumin</li><li>1 whole wheat pita</li></ul><strong>📋 Instructions:</strong><ol><li>Sauté onion, garlic, and carrot in olive oil until soft.</li><li>Add lentils, broth, and spices. Simmer for 20 minutes.</li><li>Blend if desired for a creamy texture.</li><li>Serve with warm whole wheat pita.</li></ol></div>
+    <button class="accordion">🍽️ Shrimp and Roasted Vegetables</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>150g shrimp (peeled)</li><li>1 zucchini</li><li>1 bell pepper</li><li>1 small onion</li><li>1 tbsp olive oil</li><li>Salt, pepper, turmeric</li></ul><strong>📋 Instructions:</strong><ol><li>Preheat oven to 200°C (400°F).</li><li>Chop vegetables and toss with olive oil and spices.</li><li>Spread on a baking tray and roast 15 minutes.</li><li>Add shrimp on top and roast another 8–10 minutes until cooked.</li><li>Serve hot.</li></ol></div>
+    <button class="accordion">🍽️ Vegetable Omelet with Toast</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>2 eggs</li><li>1/4 cup diced tomatoes</li><li>1/4 cup chopped spinach</li><li>1 slice whole grain toast</li><li>Salt, pepper</li><li>1 tsp olive oil</li></ul><strong>📋 Instructions:</strong><ol><li>Whisk eggs with salt and pepper.</li><li>Sauté vegetables in olive oil, then pour eggs over.</li><li>Cook until set, flipping once.</li><li>Serve with toast.</li></ol></div>
+    <button class="accordion">🍽️ Lamb with Mashed Sweet Potatoes & Zucchini</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>150g lamb (lean cut)</li><li>1 medium sweet potato</li><li>1 zucchini</li><li>1 tbsp olive oil</li><li>Salt, pepper, rosemary</li></ul><strong>📋 Instructions:</strong><ol><li>Peel, chop, and boil sweet potato until soft. Mash with olive oil and salt.</li><li>Sear lamb in a pan with salt, pepper, and rosemary until desired doneness.</li><li>Slice and sauté zucchini until soft.</li><li>Serve together.</li></ol></div>
+    <button class="accordion">🍽️ Oven-Baked Turkey Meatballs</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>300g ground turkey</li><li>1 egg</li><li>1/4 cup oats</li><li>1/2 onion (grated)</li><li>1 garlic clove (minced)</li><li>Salt & pepper</li><li>1 tsp cumin</li></ul><strong>📋 Instructions:</strong><ol><li>Preheat oven to 190°C (375°F).</li><li>Mix all ingredients in a bowl and form into small balls.</li><li>Place on a baking tray lined with parchment paper.</li><li>Bake for 20–25 minutes until golden and cooked through.</li><li>Serve with brown rice or salad.</li></ol></div>
+    <button class="accordion">🍽️ Avocado Egg Toast</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>1 slice whole grain bread</li><li>1/2 ripe avocado</li><li>1 boiled or poached egg</li><li>Salt, pepper</li><li>Chili flakes (optional)</li></ul><strong>📋 Instructions:</strong><ol><li>Toast the bread.</li><li>Mash avocado and spread over toast.</li><li>Top with egg, season with salt and pepper.</li><li>Sprinkle chili flakes if desired.</li></ol></div>
+    <button class="accordion">🍽️ Banana Oat Pancakes</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>1 ripe banana</li><li>2 eggs</li><li>1/4 cup oats</li><li>1/4 tsp cinnamon</li><li>1 tsp olive oil (for cooking)</li></ul><strong>📋 Instructions:</strong><ol><li>Blend banana, eggs, oats, and cinnamon until smooth.</li><li>Heat olive oil in a non-stick pan.</li><li>Pour batter into small circles and cook until bubbles form.</li><li>Flip and cook until golden on both sides.</li><li>Serve plain or with a few berries.</li></ol></div>
+    <button class="accordion">🍽️ Tuna Salad Wrap</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>1 can tuna (in water)</li><li>1 tbsp olive oil</li><li>Lettuce leaves or whole grain wrap</li><li>1 small cucumber (chopped)</li><li>1 small tomato (chopped)</li><li>Salt, pepper</li></ul><strong>📋 Instructions:</strong><ol><li>Drain tuna and mix with chopped vegetables and olive oil.</li><li>Season to taste.</li><li>Wrap in lettuce leaves or a whole grain tortilla.</li><li>Serve cold.</li></ol></div>
+    <button class="accordion">🍽️ Herb-Baked Cod with Mashed Sweet Potato</button>
+    <div class="panel">
+        <strong>🧂 Ingredients:</strong><ul>
+    <li>2 cod fillets (about 400g total)</li><li>1 tbsp olive oil</li><li>1 tsp dried thyme or oregano</li><li>Salt and pepper</li><li>1 lemon (sliced)</li><li>2 medium sweet potatoes</li><li>1 tbsp olive oil (for mash)</li></ul><strong>📋 Instructions:</strong><ol><li>Preheat oven to 200°C (400°F).</li><li>Peel and chop sweet potatoes, then boil in water until soft (about 20 minutes).</li><li>Place cod fillets on a baking dish, drizzle with olive oil, season with herbs, salt, pepper, and lemon slices.</li><li>Bake cod for 12–15 minutes or until it flakes easily.</li><li>Mash the boiled sweet potatoes with olive oil, salt, and pepper to taste.</li><li>Serve cod over mashed sweet potato.</li></ol></div></div>
+<div class="prep-tips">
+    <h2>🧑‍🍳 Meal Prep Tips</h2>
+    <ul>
+        <li>Prep grains like quinoa and brown rice in batches and refrigerate.</li>
+        <li>Boil eggs and store them in the fridge for easy breakfasts or snacks.</li>
+        <li>Make a batch of lentil soup or turkey meatballs and freeze portions.</li>
+        <li>Chop vegetables (like broccoli, zucchini, carrots) ahead of time.</li>
+        <li>Use airtight containers and label them with prep dates.</li>
+    </ul>
+</div>
+
+<script>
+    window.onload = function() {
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                panel.style.display = (panel.style.display === "block") ? "none" : "block";
+            });
+        }
+    };
+</script>
+</body>
+</html>
+
+<div class="prep-tips">
+    <h2>🔥 Calorie & Water Tracker</h2>
+    <p>Use this section to track your daily calorie intake and hydration. Each day, mark your estimated calories and tick off water glasses.</p>
+
+    <div style="margin-bottom: 20px;">
+        <strong>📅 Sunday</strong><br>
+        Calories: <input type="text" placeholder="e.g. 2300 kcal" style="width:120px;">
+        &nbsp;&nbsp; Water: 
+        <input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass">
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <strong>📅 Monday</strong><br>
+        Calories: <input type="text" placeholder="e.g. 2300 kcal" style="width:120px;">
+        &nbsp;&nbsp; Water: 
+        <input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass">
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <strong>📅 Tuesday</strong><br>
+        Calories: <input type="text" placeholder="e.g. 2300 kcal" style="width:120px;">
+        &nbsp;&nbsp; Water: 
+        <input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass">
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <strong>📅 Wednesday</strong><br>
+        Calories: <input type="text" placeholder="e.g. 2300 kcal" style="width:120px;">
+        &nbsp;&nbsp; Water: 
+        <input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass">
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <strong>📅 Thursday</strong><br>
+        Calories: <input type="text" placeholder="e.g. 2300 kcal" style="width:120px;">
+        &nbsp;&nbsp; Water: 
+        <input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass">
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <strong>📅 Friday (Rest Day)</strong><br>
+        Calories: <input type="text" placeholder="e.g. 2300 kcal" style="width:120px;">
+        &nbsp;&nbsp; Water: 
+        <input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass">
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <strong>📅 Saturday</strong><br>
+        Calories: <input type="text" placeholder="e.g. 2300 kcal" style="width:120px;">
+        &nbsp;&nbsp; Water: 
+        <input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass"><input type="checkbox" title="1 glass">
+    </div>
+    </div></body></html>
