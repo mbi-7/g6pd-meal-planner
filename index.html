@@ -100,5 +100,27 @@ function toggleBox(el) {
   <li>Make and freeze portions of soups or stews for busy days.</li>
 </ul>
 </div>
+
+<script>
+function toggleLanguage() {
+  const body = document.body;
+  const isRTL = body.classList.toggle('rtl');
+  document.getElementById("title").textContent = isRTL ? "🌙 تطبيق تخطيط الوجبات" : "🌙 G6PD Meal Planner App";
+}
+function toggleBox(el) {
+  el.classList.toggle("checked");
+}
+document.addEventListener("DOMContentLoaded", function() {
+  const acc = document.getElementsByClassName("accordion");
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+  }
+});
+</script>
 </body>
 </html>
+
