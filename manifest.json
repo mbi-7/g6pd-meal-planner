@@ -2,7 +2,7 @@
 {
   "name": "G6PD Meal Planner",
   "short_name": "Meal Planner",
-  "start_url": "./G6PD_Safe_Web_Plan_Dark_Mode_With_Tracker.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#121212",
   "theme_color": "#90ee90",
