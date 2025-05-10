@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>G6PD Meal Planner</title>
+  <title>G6PD Meal Planner (Enhanced)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,109 +15,79 @@
     });
   </script>
   <style>
-    body { font-family: Arial, sans-serif; background: #121212; color: #f0f0f0; padding: 20px; }
+    body { font-family: Arial, sans-serif; background: #121212; color: #f0f0f0; padding: 20px; direction: ltr; }
     h1, h2 { color: #90ee90; }
-    .day-section, .checklist, .recipe-section, .prep-tips {
-      margin-bottom: 30px; padding: 15px; background: #1e1e1e; border-radius: 8px;
-    }
-    ul { padding-left: 20px; }
-    .checklist input { margin-right: 10px; }
-    .category { font-weight: bold; color: #64b5f6; margin-top: 20px; }
-    .accordion { cursor: pointer; background-color: #2c2c2c; color: #fff;
-      padding: 10px; border: none; outline: none; width: 100%; text-align: left;
-      font-size: 16px; font-weight: bold; }
-    .accordion:hover, .accordion.active { background-color: #444; }
-    .panel { display: none; background-color: #1e1e1e; overflow: hidden;
-      padding: 0 10px; border-left: 3px solid #666; }
-    #loader-wrapper {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: #121212; display: flex; justify-content: center; align-items: center;
-      z-index: 9999;
-    }
-    .loader {
-      border: 8px solid #1e1e1e; border-top: 8px solid #90ee90;
-      border-radius: 50%; width: 60px; height: 60px;
-      animation: spin 1.5s linear infinite;
-    }
+    .section { margin-bottom: 30px; padding: 15px; background: #1e1e1e; border-radius: 8px; }
+    ul, ol { padding-left: 20px; }
+    .accordion { cursor: pointer; background-color: #2c2c2c; color: #fff; padding: 10px; width: 100%; border: none; text-align: left; font-weight: bold; }
+    .accordion:hover, .active { background-color: #444; }
+    .panel { display: none; background-color: #1e1e1e; overflow: hidden; padding: 0 10px; border-left: 3px solid #666; }
+    .rtl { direction: rtl; text-align: right; }
+    .lang-toggle { margin-bottom: 20px; }
+    #loader-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #121212;
+      display: flex; justify-content: center; align-items: center; z-index: 9999; }
+    .loader { border: 8px solid #1e1e1e; border-top: 8px solid #90ee90; border-radius: 50%;
+      width: 60px; height: 60px; animation: spin 1.5s linear infinite; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    input[type='number'] { width: 100px; margin-right: 10px; }
+    .water-box { display: inline-block; width: 20px; height: 20px; margin: 3px; border: 1px solid #fff; background: #333; }
+    .water-box.checked { background: #90ee90; }
   </style>
 </head>
 <body>
 <div id="loader-wrapper">
   <div style="text-align: center;">
-    <div class="loader" style="margin: 0 auto;"></div>
-    <p style="margin-top: 15px; font-size: 18px; color: #90ee90;">Fueling Your Health...</p>
+    <div class="loader"></div>
+    <p style="color: #90ee90;">Fueling Your Health...</p>
   </div>
 </div>
 
-<h1>🌙 G6PD Meal Planner App</h1>
-
-<!-- Daily Plan Example -->
-<div class="day-section">
-  <h2>📅 Sunday</h2>
-  <ul>
-    <li><strong>🍳 Breakfast:</strong> Greek Yogurt with Berries and Oats</li>
-    <li><strong>🥗 Lunch:</strong> Salmon with Roasted Sweet Potatoes & Broccoli</li>
-    <li><strong>🍽️ Dinner:</strong> Tuna Salad Wrap</li>
-  </ul>
+<div class="lang-toggle">
+  <button onclick="toggleLanguage()">🌍 Toggle Language</button>
 </div>
-<!-- Repeat for other days... -->
+<h1 id="title">🌙 G6PD Meal Planner App</h1>
 
-<div class="checklist">
-  <h2>🛒 Grocery Checklist</h2>
-  <div class='category'>Proteins</div><ul>
-    <li><input type='checkbox'> Chicken breast: 1.2 kg</li>
-    <li><input type='checkbox'> Salmon: 500 g</li>
-    <li><input type='checkbox'> Cod: 400 g</li>
-    <li><input type='checkbox'> Tuna (canned in water): 3 cans</li>
-    <li><input type='checkbox'> Turkey breast: 400 g</li>
-  </ul>
-  <div class='category'>Vegetables</div><ul>
-    <li><input type='checkbox'> Broccoli: 2 heads</li>
-    <li><input type='checkbox'> Sweet potatoes: 4 medium</li>
-    <li><input type='checkbox'> Zucchini: 3</li>
-    <li><input type='checkbox'> Tomatoes: 5</li>
-  </ul>
+<div class="section">
+  <h2>📊 Weekly Weight Tracker</h2>
+  <input type="number" placeholder="Start (kg)"> ➡️
+  <input type="number" placeholder="Current (kg)">
 </div>
 
-<div class="recipe-section">
-  <h2>📚 Recipe Collection</h2>
-  <button class="accordion">🍽️ Herb-Baked Cod with Mashed Sweet Potato</button>
-  <div class="panel">
-    <strong>🧂 Ingredients:</strong>
-    <ul>
-      <li>400g cod fillet</li>
-      <li>2 sweet potatoes</li>
-      <li>Olive oil, herbs</li>
-    </ul>
-    <strong>📋 Instructions:</strong>
-    <ol>
-      <li>Bake cod at 200°C for 15–20 minutes.</li>
-      <li>Boil and mash sweet potatoes with olive oil and herbs.</li>
-    </ol>
+<div class="section">
+  <h2>🧮 Daily Calorie & Water Tracker</h2>
+  <label>Calories: <input type="number" placeholder="kcal"></label><br><br>
+  <label>Water Intake:</label><br>
+  <div id="water-track">
+    <div class="water-box" onclick="toggleBox(this)"></div>
+    <div class="water-box" onclick="toggleBox(this)"></div>
+    <div class="water-box" onclick="toggleBox(this)"></div>
+    <div class="water-box" onclick="toggleBox(this)"></div>
+    <div class="water-box" onclick="toggleBox(this)"></div>
+    <div class="water-box" onclick="toggleBox(this)"></div>
+    <div class="water-box" onclick="toggleBox(this)"></div>
+    <div class="water-box" onclick="toggleBox(this)"></div>
   </div>
 </div>
 
-<div class="prep-tips">
-  <h2>🧑‍🍳 Meal Prep Tips</h2>
-  <ul>
-    <li>Prep grains like quinoa and rice in batches and refrigerate.</li>
-    <li>Boil eggs in advance for quick protein.</li>
-    <li>Chop veggies ahead and store in containers.</li>
+<div class='section'><h2>📅 Sunday</h2><ul><li><strong>🍳 Breakfast:</strong> Greek Yogurt with Berries and Oats</li><li><strong>🥗 Lunch:</strong> Salmon with Roasted Sweet Potatoes & Broccoli</li><li><strong>🍽️ Dinner:</strong> Tuna Salad Wrap</li></ul></div><div class='section'><h2>📅 Monday</h2><ul><li><strong>🍳 Breakfast:</strong> Scrambled Eggs + Avocado Toast</li><li><strong>🥗 Lunch:</strong> Grilled Chicken with Quinoa and Greens</li><li><strong>🍽️ Dinner:</strong> Oven-Baked Turkey Meatballs</li></ul></div><div class='section'><h2>📅 Tuesday</h2><ul><li><strong>🍳 Breakfast:</strong> Banana Oat Pancakes</li><li><strong>🥗 Lunch:</strong> Lentil Soup with Whole Wheat Pita</li><li><strong>🍽️ Dinner:</strong> Herb-Baked Cod with Mashed Sweet Potato</li></ul></div><div class='section'><h2>📅 Wednesday</h2><ul><li><strong>🍳 Breakfast:</strong> Avocado Egg Toast</li><li><strong>🥗 Lunch:</strong> Shrimp and Roasted Vegetables</li><li><strong>🍽️ Dinner:</strong> Vegetable Omelet with Toast</li></ul></div><div class='section'><h2>📅 Thursday</h2><ul><li><strong>🍳 Breakfast:</strong> Greek Yogurt + Honey + Oats</li><li><strong>🥗 Lunch:</strong> Baked Lamb with Mashed Sweet Potato & Zucchini</li><li><strong>🍽️ Dinner:</strong> Banana Oat Pancakes</li></ul></div><div class='section'><h2>📅 Friday (Rest Day)</h2><ul><li><strong>🍳 Breakfast:</strong> Dates + Water</li><li><strong>🥗 Lunch:</strong> Tuna Salad Wrap</li><li><strong>🍽️ Dinner:</strong> Vegetable Soup + Boiled Egg</li></ul></div><div class='section'><h2>📅 Saturday</h2><ul><li><strong>🍳 Breakfast:</strong> Egg Muffins + Tomato Toast</li><li><strong>🥗 Lunch:</strong> Falafel Bowl with Quinoa and Greens</li><li><strong>🍽️ Dinner:</strong> Herb-Baked Cod with Mashed Sweet Potato</li></ul></div><div class='section'><h2>🛒 Grocery Checklist</h2><div class='category'>Proteins</div><ul><li><input type='checkbox'> Chicken breast: 1.2 kg</li><li><input type='checkbox'> Salmon: 500 g</li><li><input type='checkbox'> Cod: 400 g</li><li><input type='checkbox'> Tuna (canned): 3 cans</li><li><input type='checkbox'> Turkey breast: 400 g</li><li><input type='checkbox'> Eggs: 14</li></ul><div class='category'>Vegetables</div><ul><li><input type='checkbox'> Broccoli: 2 heads</li><li><input type='checkbox'> Sweet potatoes: 4</li><li><input type='checkbox'> Zucchini: 3</li><li><input type='checkbox'> Tomatoes: 5</li><li><input type='checkbox'> Onions: 5</li></ul><div class='category'>Fruits</div><ul><li><input type='checkbox'> Bananas: 7</li><li><input type='checkbox'> Apples: 5</li><li><input type='checkbox'> Berries: 300 g</li><li><input type='checkbox'> Dates: 200 g</li><li><input type='checkbox'> Avocado: 3</li></ul><div class='category'>Grains</div><ul><li><input type='checkbox'> Quinoa: 300 g</li><li><input type='checkbox'> Brown rice: 600 g</li><li><input type='checkbox'> Whole grain bread: 1 loaf</li><li><input type='checkbox'> Whole wheat pita: 6 pieces</li><li><input type='checkbox'> Oats: 500 g</li></ul></div><div class='section'><h2>📚 Recipe Collection</h2><button class='accordion'>🍽️ Herb-Baked Cod with Mashed Sweet Potato</button><div class='panel'><strong>🧂 Ingredients:</strong><ul><li>400g cod fillet</li><li>2 sweet potatoes</li><li>Olive oil</li><li>Mixed herbs</li></ul><strong>📋 Instructions:</strong><ol><li>Preheat oven to 200°C.</li><li>Season cod with herbs and olive oil.</li><li>Bake cod for 15–20 minutes.</li><li>Boil sweet potatoes until soft.</li><li>Mash with a bit of olive oil and salt.</li></ol></div><button class='accordion'>🍽️ Lentil Soup with Pita</button><div class='panel'><strong>🧂 Ingredients:</strong><ul><li>1 cup lentils</li><li>1 onion</li><li>1 carrot</li><li>Garlic</li><li>Vegetable broth</li></ul><strong>📋 Instructions:</strong><ol><li>Sauté onion, garlic, and carrot.</li><li>Add lentils and broth.</li><li>Simmer until lentils are soft.</li><li>Serve with warm pita bread.</li></ol></div></div>
+    <li><strong>Monday:</strong> Eggs & Avocado Toast, Grilled Chicken, Turkey Meatballs</li>
+    <li><strong>Tuesday:</strong> Banana Oat Pancakes, Lentil Soup, Herb-Baked Cod</li>
+    <li><strong>Wednesday:</strong> Avocado Toast, Shrimp Veggies, Veggie Omelet</li>
+    <li><strong>Thursday:</strong> Yogurt + Honey, Baked Lamb, Banana Pancakes</li>
+    <li><strong>Friday (Rest):</strong> Dates & Water, Tuna Wrap, Veggie Soup</li>
+    <li><strong>Saturday:</strong> Egg Muffins, Falafel Bowl, Herb-Baked Cod</li>
   </ul>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var acc = document.getElementsByClassName("accordion");
-    for (var i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        panel.style.display = (panel.style.display === "block") ? "none" : "block";
-      });
-    }
-  });
+function toggleLanguage() {
+  const body = document.body;
+  const isRTL = body.classList.toggle('rtl');
+  document.getElementById("title").textContent = isRTL ? "🌙 تطبيق تخطيط الوجبات" : "🌙 G6PD Meal Planner App";
+}
+function toggleBox(el) {
+  el.classList.toggle("checked");
+}
 </script>
 </body>
 </html>
