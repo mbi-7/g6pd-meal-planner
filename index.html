@@ -11,6 +11,9 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
+    window.addEventListener('load', function() {
+      document.getElementById('loader-wrapper').style.display = 'none';
+    });
   </script>
   <style>
     body { font-family: Arial, sans-serif; background: #121212; color: #f0f0f0; padding: 20px; }
@@ -18,53 +21,34 @@
     .day-section, .checklist, .recipe-section, .prep-tips {
       margin-bottom: 30px; padding: 15px; background: #1e1e1e; border-radius: 8px;
     }
+    ul { padding-left: 20px; }
+    .checklist input { margin-right: 10px; }
+    .category { font-weight: bold; color: #64b5f6; margin-top: 20px; }
+    .accordion { cursor: pointer; background-color: #2c2c2c; color: #fff;
+      padding: 10px; border: none; outline: none; width: 100%; text-align: left;
+      font-size: 16px; font-weight: bold; }
+    .accordion:hover, .accordion.active { background-color: #444; }
+    .panel { display: none; background-color: #1e1e1e; overflow: hidden;
+      padding: 0 10px; border-left: 3px solid #666; }
+    #loader-wrapper {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #121212; display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+    }
+    .loader {
+      border: 8px solid #1e1e1e; border-top: 8px solid #90ee90;
+      border-radius: 50%; width: 60px; height: 60px;
+      animation: spin 1.5s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
-
-<style>
-  #loader-wrapper {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #121212;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-
-  .loader {
-    border: 8px solid #1e1e1e;
-    border-top: 8px solid #90ee90;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1.5s linear infinite;
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-</style>
-
-<script>
-  window.addEventListener('load', function() {
-    document.getElementById('loader-wrapper').style.display = 'none';
-  });
-</script>
 </head>
-
-
+<body>
 <div id="loader-wrapper">
   <div style="text-align: center;">
     <div class="loader" style="margin: 0 auto;"></div>
     <p style="margin-top: 15px; font-size: 18px; color: #90ee90;">Fueling Your Health...</p>
   </div>
 </div>
-</div>
-<body>
-  <h1>🌙 G6PD Meal Planner App</h1>
-  <p>This is your installable meal planner app. You can add features here just like before.</p>
-</body>
-</html>
+
+<h1>🌙 G6PD Meal Planner App</h1>
